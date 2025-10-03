@@ -6,6 +6,7 @@ class Ghost {
     Point _position;
     Direction _direction;
 public:
+    Ghost(); 
     Ghost(const Point& startPos);
     void Move();
     Point GetPosition() const;
