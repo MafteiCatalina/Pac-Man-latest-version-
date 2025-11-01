@@ -1,12 +1,11 @@
 #include "painter.hpp"
 #include <iostream>
+#include <vector>
 
-void Painter::DrawImage(Point topLeft, Point bottomRight, char** image) { 
-
-    std::cout << "Painter: Drawing image from " << topLeft.x << ", " << topLeft.y 
-              << " to " << bottomRight.x << ", " << bottomRight.y << std::endl;
+void Painter::DrawImage(Point topLeft, Point bottomRight, const std::vector<std::string>& image) { 
+    std::cout << "Painter: Drawing image from " << topLeft << " to " << bottomRight << std::endl;
 }
 
-void Painter::WriteText(Point position, char* text) { 
-    std::cout << "Painter: Writing text '" << text << "' at " << position.x << ", " << position.y << std::endl;
+void Painter::WriteText(Point position, const std::string& text) { 
+    std::cout << "Painter: Writing text '" << text << "' at " << position << std::endl;
 }
