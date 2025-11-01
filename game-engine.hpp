@@ -2,13 +2,15 @@
 #include "pacman.hpp"
 #include "ghost.hpp"
 #include "board.hpp"
-#include "painter.hpp" 
+#include "abstract_painter.hpp" 
+#include <array>
+#include <memory> 
 
 class GameEngine {
     Pacman _pacman;
-    Ghost _ghosts[4]; 
+    std::array<Ghost, 4> _ghosts; 
     Board _board;
-    Painter _painter; 
+    std::unique_ptr<AbstractPainter> _painter; 
 public:
     GameEngine();
     void Init();
