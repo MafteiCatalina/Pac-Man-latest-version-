@@ -4,6 +4,10 @@
 #include <iterator>
 #include <memory>
 
+#include "external/json.hpp"
+#include <fstream>
+using json = nlohmann::json;
+
 GameEngine::GameEngine() { 
     _painter = std::make_unique<Painter>(); 
 }
@@ -22,4 +26,9 @@ void GameEngine::Run() {
     if (areFantomeVulnerabile) {
         _painter->WriteText({1, 23}, "Fantomele sunt vulnerabile!");
     }
+
+    json data;
+    data["score"] = _pacman.GetScore();
+    std::ofstream file("save.json");
+    file << data;
 }
