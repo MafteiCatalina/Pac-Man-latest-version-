@@ -1,31 +1,41 @@
-all: Pacman.exe
+LIB_OBJS = point.o direction.o board.o ghost.o pacman.o
+LIB_NAME = libdata.a
 
-Pacman.exe: board.o direction.o game-engine.o ghost.o pacman.o painter.o point.o main.o
-	g++ -o Pacman.exe board.o direction.o game-engine.o ghost.o pacman.o painter.o point.o main.o -std=c++17
+APP_OBJS = painter.o game-engine.o main.o
 
-board.o: board.cpp board.hpp direction.hpp point.hpp
-	g++ board.cpp -o board.o -c -std=c++17
+all: $(LIB_NAME) Pacman.exe
 
-direction.o: direction.cpp direction.hpp
-	g++ direction.cpp -o direction.o -c -std=c++17
+$(LIB_NAME): $(LIB_OBJS)
+	ar rcs lib/$(LIB_NAME) $(LIB_OBJS)
 
-game-engine.o: game-engine.cpp game-engine.hpp board.hpp pacman.hpp ghost.hpp abstract_painter.hpp
-	g++ game-engine.cpp -o game-engine.o -c -std=c++17
-
-ghost.o: ghost.cpp ghost.hpp direction.hpp point.hpp
-	g++ ghost.cpp -o ghost.o -c -std=c++17
-
-pacman.o: pacman.cpp pacman.hpp direction.hpp point.hpp
-	g++ pacman.cpp -o pacman.o -c -std=c++17
-
-painter.o: painter.cpp painter.hpp abstract_painter.hpp
-	g++ painter.cpp -o painter.o -c -std=c++17
+Pacman.exe: $(APP_OBJS) $(LIB_NAME)
+	g++ -o Pacman.exe $(APP_OBJS) -Llib -ldata -std=c++17
 
 point.o: point.cpp point.hpp
-	g++ point.cpp -o point.o -c -std=c++17
+	g++ point.cpp -c -std=c++17
 
-main.o: main.cpp 
-	g++ main.cpp -o main.o -c -std=c++17
+direction.o: direction.cpp direction.hpp
+	g++ direction.cpp -c -std=c++17
+
+board.o: board.cpp board.hpp
+	g++ board.cpp -c -std=c++17
+
+ghost.o: ghost.cpp ghost.hpp
+	g++ ghost.cpp -c -std=c++17
+
+pacman.o: pacman.cpp pacman.hpp
+	g++ pacman.cpp -c -std=c++17
+
+painter.o: painter.cpp painter.hpp abstract_painter.hpp
+	g++ painter.cpp -c -std=c++17
+
+game-engine.o: game-engine.cpp game-engine.hpp
+	g++ game-engine.cpp -c -std=c++17
+
+main.o: main.cpp
+	g++ main.cpp -c -std=c++17
 
 clean:
-	DEL *.o Pacman.exe
+	del *.o
+	del lib\libdata.a
+	del Pacman.exe
