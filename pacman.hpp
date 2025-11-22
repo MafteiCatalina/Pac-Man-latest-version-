@@ -15,7 +15,7 @@ public:
 
     Pacman();
     Pacman(const Point& startPos);
-    Pacman(const Pacman& other); 
+    Pacman(const Pacman& other);
 
     void Move(Direction direction);
     void EatDot();
@@ -26,8 +26,10 @@ public:
     int GetLives() const;
     Direction GetDirection() const { return _direction; }
 
-    Pacman operator = (const Pacman& other); 
-    bool operator == (const Pacman& other) const; 
+    void SetPosition(Point position);
+
+    Pacman operator = (const Pacman& other);
+    bool operator == (const Pacman& other) const;
 };
 
 std::istream& operator >> (std::istream& in, Pacman& pacman);

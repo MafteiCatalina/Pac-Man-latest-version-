@@ -4,26 +4,39 @@ Ghost::Ghost() : _position({0, 0}), _direction(Direction::Up), _vulnerable(false
 
 Ghost::Ghost(const Point& startPos) : _position(startPos), _direction(Direction::Up), _vulnerable(false) {}
 
-Ghost::Ghost(const Ghost& other) : 
-    _position(other._position), 
+Ghost::Ghost(const Ghost& other) :
+    _position(other._position),
     _direction(other._direction),
     _vulnerable(other._vulnerable) {}
 
-void Ghost::Move() {  }
-Point Ghost::GetPosition() const { return _position; }
+void Ghost::Move() {}
 
-Direction Ghost::GetDirection() const { return _direction; }
+Point Ghost::GetPosition() const {
+    return _position;
+}
 
-bool Ghost::IsVulnerable() const { return _vulnerable; }
+Direction Ghost::GetDirection() const {
+    return _direction;
+}
 
-void Ghost::SetVulnerable(bool vulnerable) { _vulnerable = vulnerable; }
+bool Ghost::IsVulnerable() const {
+    return _vulnerable;
+}
 
-void Ghost::SetDirection(Direction direction) { _direction = direction; }
+void Ghost::SetVulnerable(bool vulnerable) {
+    _vulnerable = vulnerable;
+}
 
-Ghost Ghost::operator=(const Ghost &other)
-{
-    if (this != &other)
-    {
+void Ghost::SetDirection(Direction direction) {
+    _direction = direction;
+}
+
+void Ghost::SetPosition(Point position) {
+    _position = position;
+}
+
+Ghost Ghost::operator=(const Ghost& other) {
+    if (this != &other) {
         _position = other._position;
         _direction = other._direction;
         _vulnerable = other._vulnerable;
@@ -31,12 +44,11 @@ Ghost Ghost::operator=(const Ghost &other)
     return *this;
 }
 
-bool Ghost::operator==(const Ghost &other) const
-{
+bool Ghost::operator==(const Ghost& other) const {
     return _position == other._position && _direction == other._direction && _vulnerable == other._vulnerable;
 }
 
-std::istream& operator >> (std::istream& in, Ghost& ghost){
+std::istream& operator >> (std::istream& in, Ghost& ghost) {
     Point pos;
     if (in >> pos) {
         ghost = Ghost(pos);
@@ -44,7 +56,7 @@ std::istream& operator >> (std::istream& in, Ghost& ghost){
     return in;
 }
 
-std::ostream& operator << (std::ostream& out, const Ghost& ghost){
+std::ostream& operator << (std::ostream& out, const Ghost& ghost) {
     out << ghost.GetPosition() << " " << ghost.GetDirection() << " " << (ghost.IsVulnerable() ? "Vulnerable" : "Normal");
     return out;
 }
