@@ -1,15 +1,15 @@
 #include "pacman.hpp"
 
-Pacman::Pacman() : 
-    _position({1, 1}), 
-    _direction(Direction::Right), 
-    _lives(3), 
+Pacman::Pacman() :
+    _position({1, 1}),
+    _direction(Direction::Right),
+    _lives(3),
     _score(0) {}
 
-Pacman::Pacman(const Point& startPos) : 
-    _position(startPos), 
-    _direction(Direction::Right), 
-    _lives(3), 
+Pacman::Pacman(const Point& startPos) :
+    _position(startPos),
+    _direction(Direction::Right),
+    _lives(3),
     _score(0) {}
 
 Pacman::Pacman(const Pacman& other) :
@@ -18,19 +18,36 @@ Pacman::Pacman(const Pacman& other) :
     _lives(other._lives),
     _score(other._score) {}
 
-void Pacman::Move(Direction direction) { 
+void Pacman::Move(Direction direction) {
     _direction = direction;
 }
-Point Pacman::GetPosition() const { return _position; }
-int Pacman::GetScore() const { return _score; }
-int Pacman::GetLives() const { return _lives; }
-void Pacman::EatDot() { _score += 10; } 
-void Pacman::LoseLife() { _lives -= 1; } 
 
-Pacman Pacman::operator=(const Pacman &other)
-{
-    if (this != &other)
-    {
+void Pacman::EatDot() {
+    _score += 10;
+}
+
+void Pacman::LoseLife() {
+    _lives -= 1;
+}
+
+Point Pacman::GetPosition() const {
+    return _position;
+}
+
+int Pacman::GetScore() const {
+    return _score;
+}
+
+int Pacman::GetLives() const {
+    return _lives;
+}
+
+void Pacman::SetPosition(Point position) {
+    _position = position;
+}
+
+Pacman Pacman::operator=(const Pacman& other) {
+    if (this != &other) {
         _position = other._position;
         _direction = other._direction;
         _lives = other._lives;
@@ -39,21 +56,20 @@ Pacman Pacman::operator=(const Pacman &other)
     return *this;
 }
 
-bool Pacman::operator==(const Pacman &other) const
-{
-    return _position == other._position && 
+bool Pacman::operator==(const Pacman& other) const {
+    return _position == other._position &&
            _direction == other._direction &&
-           _lives == other._lives && 
+           _lives == other._lives &&
            _score == other._score;
 }
 
-std::istream& operator >> (std::istream& in, Pacman& pacman){
+std::istream& operator >> (std::istream& in, Pacman& pacman) {
     if (in >> pacman._position >> pacman._lives >> pacman._score) {
     }
     return in;
 }
 
-std::ostream& operator << (std::ostream& out, const Pacman& pacman){
+std::ostream& operator << (std::ostream& out, const Pacman& pacman) {
     out << pacman.GetPosition() << " " << pacman.GetLives() << " " << pacman.GetScore();
     return out;
 }

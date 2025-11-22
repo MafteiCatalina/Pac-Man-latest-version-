@@ -9,7 +9,9 @@ $(LIB_NAME): $(LIB_OBJS)
 	ar rcs lib/$(LIB_NAME) $(LIB_OBJS)
 
 Pacman.exe: $(APP_OBJS) $(LIB_NAME)
-	g++ -o Pacman.exe $(APP_OBJS) -Llib -ldata -std=c++17
+	g++ -o Pacman.exe $(APP_OBJS) -Llib -ldata \
+	-Lexternal/raylib/lib -lraylib \
+	-lopengl32 -lgdi32 -lwinmm -std=c++17
 
 point.o: point.cpp point.hpp
 	g++ point.cpp -c -std=c++17
@@ -20,17 +22,17 @@ direction.o: direction.cpp direction.hpp
 board.o: board.cpp board.hpp
 	g++ board.cpp -c -std=c++17
 
-ghost.o: ghost.cpp ghost.hpp
+ghost.o: ghost.cpp ghost.hpp direction.hpp point.hpp
 	g++ ghost.cpp -c -std=c++17
 
-pacman.o: pacman.cpp pacman.hpp
+pacman.o: pacman.cpp pacman.hpp direction.hpp point.hpp
 	g++ pacman.cpp -c -std=c++17
 
 painter.o: painter.cpp painter.hpp abstract_painter.hpp
 	g++ painter.cpp -c -std=c++17
 
-game-engine.o: game-engine.cpp game-engine.hpp
-	g++ game-engine.cpp -c -std=c++17
+game-engine.o: game-engine.cpp game-engine.hpp board.hpp pacman.hpp ghost.hpp
+	g++ -Iexternal -Iexternal/raylib/include game-engine.cpp -c -std=c++17
 
 main.o: main.cpp
 	g++ main.cpp -c -std=c++17
