@@ -24,8 +24,9 @@ painter.o: painter.cpp painter.hpp abstract_painter.hpp
 point.o: point.cpp point.hpp
 	g++ point.cpp -o point.o -c -std=c++17
 
-main.o: main.cpp 
+main.o: main.cpp
 	g++ main.cpp -o main.o -c -std=c++17
 
 clean:
-	DEL *.o Pacman.exe
+	del *.o
+	del Pacman.exe

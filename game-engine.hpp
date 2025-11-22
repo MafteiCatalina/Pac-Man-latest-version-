@@ -2,17 +2,30 @@
 #include "pacman.hpp"
 #include "ghost.hpp"
 #include "board.hpp"
-#include "abstract_painter.hpp" 
 #include <array>
-#include <memory> 
+#include <vector>
+#include <string>
+#include <memory>
 
 class GameEngine {
+    std::unique_ptr<Board> _board;
     Pacman _pacman;
-    std::array<Ghost, 4> _ghosts; 
-    Board _board;
-    std::unique_ptr<AbstractPainter> _painter; 
+    std::array<Ghost, 4> _ghosts;
+    std::vector<std::string> _map;
+
 public:
     GameEngine();
     void Init();
     void Run();
+
+private:
+    void DrawBoard() const;
+    bool IsWall(const Point& p) const;
+    bool HasPellets() const;
+    std::vector<Point> GetNeighbors(const Point& p) const;
+    void MoveGhosts();
+    void ResetPositions();
+
+    Point _pacmanStart;
+    std::array<Point, 4> _ghostStarts;
 };
