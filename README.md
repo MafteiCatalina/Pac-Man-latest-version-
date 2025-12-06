@@ -1,24 +1,63 @@
 # Pac-Man
 
-## Descriere
-Proiectul implementează structura de bază a jocului Pac-Man, un joc clasic de tip arcade.
+## 📌 Descrierea proiectului
 
-## Regulile jocului
-- Jucătorul controlează pe Pac-Man, care trebuie să mănânce toate punctele din labirint.
-- Există 4 fantome care încearcă să îl prindă.
-- Dacă Pac-Man mănâncă o bilă specială, fantomele devin vulnerabile pentru scurt timp.
-- Jocul se termină când Pac-Man pierde toate viețile sau când labirintul este golit de puncte.
+Acest proiect implementează o versiune simplificată a jocului clasic **Pac-Man**, folosind limbajul **C++** și biblioteca grafică **raylib**.  
+Jocul rulează într-o fereastră grafică și folosește o hartă internă reprezentată ca matrice de caractere, împreună cu clasele:
 
-- `W` - move Up,
-- `A` - move Left,
-- `D` - move Right,
-- `S` - move Down,
+- `Point` – coordonatele obiectelor (x, y)
+- `Direction` – direcțiile posibile de mișcare
+- `Board` – harta jocului (dimensiuni)
+- `Pacman` – jucătorul
+- `Ghost` – inamicii
+- `GameEngine` – logica jocului (inițializare, mișcare, coliziuni, randare)
+- `Painter` / `AbstractPainter` – interfață și implementare de desen
 
-## Structuri de date
-- `Point` – coordonatele obiectelor (x, y).
-- `Direction` – direcțiile posibile de mișcare.
-- `Board` – harta jocului.
-- `Pacman` – jucătorul.
-- `Ghost` – inamicii.
-- `GameEngine` – logica jocului.
-- `Painter` – afișarea grafică.
+## 🎮 Regulile jocului
+
+- Jucătorul controlează pe **Pac-Man**, care trebuie să mănânce toate punctele din labirint.
+- Mișcarea se face din taste:
+  - `W` sau săgeata sus – UP
+  - `A` sau săgeata stânga – LEFT
+  - `S` sau săgeata jos – DOWN
+  - `D` sau săgeata dreapta – RIGHT
+- Pe hartă se află 4 fantome care urmăresc jucătorul, fiecare cu o logică de deplasare inspirată din jocul original.
+- Dacă Pac-Man se ciocnește cu o fantomă:
+  - pierde o viață;
+  - dacă nu mai are vieți, jocul se termină (Game Over).
+- Când toate punctele (pellets) sunt mâncate, jocul se încheie cu victorie.
+- La final, scorul jucătorului este salvat în fișierul `save.json`.
+
+## 🧩 Dependențe ale proiectului
+
+### Limbaj și compilator
+
+- **C++17**
+- Compilator recomandat:
+  - `g++` (MinGW pe Windows sau g++ pe Linux)
+  - sau `clang++`
+
+### Biblioteci externe
+
+- [raylib](https://www.raylib.com/) – pentru fereastră grafică, desenarea formelor și gestionarea tastaturii.
+  - În proiect, raylib este așteptat în directorul `external/raylib/` (include + lib).
+- [nlohmann/json](https://github.com/nlohmann/json) – pentru salvarea scorului în format JSON.
+  - În cod este inclus ca `external/json.hpp`.
+
+### Mediu de dezvoltare
+
+Proiectul a fost testat în:
+
+- **Windows 10/11** cu MinGW și raylib compilat pentru Windows
+- Editor recomandat: Visual Studio Code / CLion / VS + extensii pentru C++
+
+## 🛠️ Modul de construire a aplicației
+
+Proiectul folosește un fișier `Makefile`.
+
+### Compilare aplicație
+
+În directorul proiectului:
+
+```bash
+make

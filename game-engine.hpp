@@ -7,6 +7,11 @@
 #include <string>
 #include <memory>
 
+/**
+ * @file game-engine.hpp
+ * @brief Motorul principal al jocului Pac-Man.
+ * Proiect: Pac-Man — Autor: Maftei Cătălina — An: 2025
+ */
 class GameEngine {
     std::unique_ptr<Board> _board;
     Pacman _pacman;

@@ -3,6 +3,11 @@
 #include "point.hpp"
 #include "direction.hpp"
 
+/**
+ * @file pacman.hpp
+ * @brief Reprezintă personajul principal Pac-Man.
+ * Proiect: Pac-Man — Autor: Maftei Cătălina — An: 2025
+ */
 class Pacman {
 private:
     Point _position;
@@ -31,6 +36,3 @@ public:
     Pacman operator = (const Pacman& other);
     bool operator == (const Pacman& other) const;
 };
-
-std::istream& operator >> (std::istream& in, Pacman& pacman);
-std::ostream& operator << (std::ostream& out, const Pacman& pacman);

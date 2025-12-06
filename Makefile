@@ -3,6 +3,9 @@ LIB_NAME = libdata.a
 
 APP_OBJS = painter.o game-engine.o main.o
 
+TEST_OBJ = tests/test_data.o
+TEST_EXE = tests.exe
+
 all: $(LIB_NAME) Pacman.exe
 
 $(LIB_NAME): $(LIB_OBJS)
@@ -37,7 +40,15 @@ game-engine.o: game-engine.cpp game-engine.hpp board.hpp pacman.hpp ghost.hpp
 main.o: main.cpp
 	g++ main.cpp -c -std=c++17
 
+tests/test_data.o: tests/test_data.cpp point.hpp board.hpp pacman.hpp ghost.hpp direction.hpp
+	g++ tests/test_data.cpp -c -std=c++17 -o tests/test_data.o
+
+test: $(LIB_NAME) $(TEST_OBJ)
+	g++ -o $(TEST_EXE) $(TEST_OBJ) -Llib -ldata -std=c++17
+	./$(TEST_EXE)
+
 clean:
 	del *.o
 	del lib\libdata.a
 	del Pacman.exe
+	-del $(TEST_EXE)

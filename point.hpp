@@ -1,6 +1,11 @@
 #pragma once
 #include <iostream>
 
+/**
+ * @file point.hpp
+ * @brief Structură pentru coordonate 2D.
+ * Proiect: Pac-Man — Autor: Maftei Cătălina — An: 2025
+ */
 struct Point {
     int x;
     int y;
